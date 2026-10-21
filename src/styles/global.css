@@ -733,14 +733,14 @@ p {
   justify-self: end;
 }
 /* Reels play in turn and cross-fade; the screen keeps the phone's proportional corners. */
-.tile__reel {
+.reel {
   position: relative;
   aspect-ratio: 390 / 844;
   border-radius: 9.2% / 4.3%;
   overflow: hidden;
   background: #2f333b;
 }
-.tile__reel video {
+.reel video {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -749,7 +749,7 @@ p {
   opacity: 0;
   transition: opacity 0.5s var(--ease);
 }
-.tile__reel video.is-on {
+.reel video.is-on {
   opacity: 1;
 }
 @keyframes ping {
@@ -938,23 +938,6 @@ p {
     padding-left: 24px;
     color: var(--blue-ink);
   }
-}
-.fields__float {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 220px;
-  height: 300px;
-  object-fit: contain;
-  object-position: bottom;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.25s;
-  filter: drop-shadow(0 20px 30px rgba(10, 30, 70, 0.25));
-  z-index: 2;
-}
-.fields__float.is-on {
-  opacity: 1;
 }
 
 /* Pricing */
@@ -1152,25 +1135,22 @@ p {
   position: absolute;
   inset: 0;
   background: url('/img/pattern-tile-blue.svg') repeat;
-  background-size: 300px auto;
+  background-size: 600px auto;
   animation: drift 40s linear infinite;
   opacity: 0.9;
 }
 @keyframes drift {
   to {
-    background-position: 0 -373.9px;
+    background-position: 0 -747.8px;
   }
 }
 .cta__in {
   position: relative;
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
-  align-items: end;
+  align-items: center;
   gap: 24px;
-  padding-top: clamp(64px, 8vw, 110px);
-}
-.cta__copy {
-  padding-bottom: clamp(64px, 8vw, 110px);
+  padding-block: clamp(56px, 7vw, 96px);
 }
 .cta__title {
   font-family: var(--display);
@@ -1188,24 +1168,9 @@ p {
 .cta .stores {
   margin-top: 32px;
 }
-.cta__people {
-  position: relative;
-  height: clamp(320px, 34vw, 480px);
-}
-.cta__people img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: bottom;
-  opacity: 0;
-  transform: translateY(24px) scale(0.98);
-  transition: opacity 0.8s var(--ease), transform 0.9s var(--ease);
-}
-.cta__people img.is-on {
-  opacity: 1;
-  transform: none;
+.cta__phone {
+  width: clamp(220px, 20vw, 290px);
+  justify-self: center;
 }
 
 /* Footer */
@@ -1415,11 +1380,9 @@ p {
   .cta__in {
     grid-template-columns: 1fr;
   }
-  .cta__copy {
-    padding-bottom: 0;
-  }
-  .cta__people {
-    height: 340px;
+  .cta__phone {
+    width: min(70%, 270px);
+    margin-top: 36px;
   }
   .foot__in {
     grid-template-columns: 1fr;

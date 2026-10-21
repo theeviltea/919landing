@@ -16,7 +16,6 @@ const logo = fs.readFileSync('public/img/logo.svg', 'utf8').replace('<svg ', '<s
 const cells = Array.from({ length: 20 }, (_, i) => ({ col: i % 4, row: Math.floor(i / 4) }));
 // Licensed stock photos only (no generated or web-sourced faces).
 const faces = ['f-pink-skirt', 'f-headphones', 'f-yellow-suit', 'f-guitar-electric', 'f-makeup', 'f-videographer', 'f-dj', 'f-photographer', 'f-guitar-hat', 'f-guitar-acoustic', 'f-yellow-lips'];
-const cutouts = ['c-pink-skirt', 'c-guitar-electric', 'c-makeup', 'c-yellow-suit', 'c-videographer'];
 
 const apple = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.37 12.7c-.02-2.1 1.72-3.12 1.8-3.17-.98-1.43-2.5-1.63-3.04-1.65-1.29-.13-2.52.76-3.18.76-.66 0-1.67-.74-2.75-.72-1.41.02-2.72.82-3.45 2.09-1.47 2.55-.38 6.33 1.06 8.4.7 1.01 1.53 2.15 2.62 2.11 1.05-.04 1.45-.68 2.72-.68 1.27 0 1.63.68 2.74.66 1.13-.02 1.85-1.03 2.54-2.05.8-1.17 1.13-2.3 1.15-2.36-.03-.01-2.2-.85-2.21-3.39ZM14.3 6.53c.58-.7.97-1.68.86-2.65-.83.03-1.84.55-2.44 1.25-.53.62-1 1.61-.88 2.56.93.07 1.88-.47 2.46-1.16Z"/></svg>';
 const play = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.36-.2-.6-.58-.6-1.05V3.25c0-.47.24-.85.6-1.05Z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.72 2.12c.79.45.79 1.6 0 2.05l-3.72 2.43Z"/><path fill="#4285F4" d="M16.7 8.7 13.4 12 3.6 2.2c.3-.17.68-.2 1.05 0l12.05 6.5Z"/><path fill="#EA4335" d="M16.7 15.3 4.65 21.8c-.37.2-.75.17-1.05 0L13.4 12l3.3 3.3Z"/></svg>';
@@ -168,7 +167,7 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
                 <p>{t.features.video.text}</p>
               </div>
               <div class="phone tile__phone" aria-hidden="true">
-                <div class="tile__reel">
+                <div class="reel">
                   <video class="is-on" poster="/video/reel-neon.webp" autoplay muted playsinline preload="auto" data-reel-video>
                     <source src="/video/reel-neon.mp4" type='video/mp4; codecs="avc1.4D401F"' />
                     <source src="/video/reel-neon.webm" type="video/webm" />
@@ -230,7 +229,7 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
           <ul class="fields__list">
             {
               t.fields.list.map((f) => (
-                <li class="field" data-img={`/people/${f.img}.webp`}>
+                <li class="field">
                   <span class="field__name">{f.name}</span>
                   <span class="field__roles">{f.roles}</span>
                 </li>
@@ -238,7 +237,6 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
             }
           </ul>
         </div>
-        <img class="fields__float" alt="" aria-hidden="true" data-float />
       </section>
 
       <!-- Pricing -->
@@ -308,8 +306,13 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
               <a class="store" href={STORE.android} rel="noopener" target="_blank"><Fragment set:html={play} /><span><small>{t.hero.android}</small>{t.hero.androidStore}</span></a>
             </div>
           </div>
-          <div class="cta__people" aria-hidden="true" data-cutouts>
-            {cutouts.map((c, i) => <img src={`/people/${c}.webp`} alt="" class={i === 0 ? 'is-on' : ''} loading="lazy" />)}
+          <div class="phone cta__phone" aria-hidden="true">
+            <div class="reel">
+              <video class="is-on" poster="/video/reel-auth.webp" autoplay muted loop playsinline preload="metadata" data-loop-video>
+                <source src="/video/reel-auth.mp4" type='video/mp4; codecs="avc1.4D401F"' />
+                <source src="/video/reel-auth.webm" type="video/webm" />
+              </video>
+            </div>
           </div>
         </div>
       </section>
@@ -420,7 +423,7 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
 
       // Video presentations play one after another, round and round; still for reduced motion.
       const reel = [...document.querySelectorAll<HTMLVideoElement>('[data-reel-video]')];
-      if (reduce) reel.forEach((v) => v.pause());
+      if (reduce) [...reel, ...document.querySelectorAll<HTMLVideoElement>('[data-loop-video]')].forEach((v) => v.pause());
       else
         reel.forEach((v, k) =>
           v.addEventListener('ended', () => {
@@ -459,24 +462,6 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
       };
       cycle('[data-states]', '.state', 1600);
       cycle('[data-chips]', 'span', 1800);
-      cycle('[data-cutouts]', 'img', 3200);
-
-      // Fields: a person follows the cursor over the list (pointer devices only).
-      const fields = document.querySelector<HTMLElement>('[data-fields]');
-      const float = document.querySelector<HTMLImageElement>('[data-float]');
-      if (fields && float && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        fields.querySelectorAll<HTMLElement>('.field').forEach((row) => {
-          row.addEventListener('mouseenter', () => {
-            float.src = row.dataset.img!;
-            float.classList.add('is-on');
-          });
-          row.addEventListener('mouseleave', () => float.classList.remove('is-on'));
-        });
-        fields.addEventListener('mousemove', (e) => {
-          const r = fields.getBoundingClientRect();
-          float.style.transform = `translate(${e.clientX - r.left - 110}px, ${e.clientY - r.top - 150}px) rotate(${(e.clientX / window.innerWidth - 0.5) * 10}deg)`;
-        });
-      }
     </script>
   </body>
 </html>
