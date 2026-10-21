@@ -506,8 +506,9 @@ p {
 }
 .roles__head {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 20px 40px;
+  /* Same columns as .story so the switch and the phone share one centre line. */
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 64px;
   align-items: end;
 }
 .roles__head .lead {
@@ -517,6 +518,7 @@ p {
   grid-column: 2;
   grid-row: 1 / span 2;
   align-self: end;
+  justify-self: center;
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -637,6 +639,10 @@ p {
   transform: none;
 }
 .story__dots {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  translate: 0 -50%;
   display: flex;
   flex-direction: column;
   gap: 8px;
