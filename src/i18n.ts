@@ -58,7 +58,7 @@ const en = {
     team: { title: 'Hire as a team', text: 'Invite recruiters to your company profile. Everyone posts and chats under one verified name.' },
   },
   fields: {
-    title: 'Six fields, hundreds of roles',
+    title: 'Choose your role',
     lead: 'From a one-night event to a full-time contract.',
     list: [
       { name: 'Hospitality', roles: 'Hostesses, waiters, bartenders, champagne girls, concierges' },
@@ -139,7 +139,7 @@ const ru: typeof en = {
     team: { title: 'Нанимайте командой', text: 'Пригласи рекрутеров в профиль компании. Все публикуют вакансии и общаются от одного проверенного имени.' },
   },
   fields: {
-    title: 'Шесть сфер, сотни ролей',
+    title: 'Выбирайте свою роль',
     lead: 'От одного вечера до постоянного контракта.',
     list: [
       { name: 'Hospitality', roles: 'Хостес, официанты, бармены, champagne girls, консьержи' },
