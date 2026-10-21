@@ -14,8 +14,9 @@ const logo = fs.readFileSync('public/img/logo.svg', 'utf8').replace('<svg ', '<s
 
 // Casting wall: the 919 pattern tile cut into 4×5 cells; some cells flip to people.
 const cells = Array.from({ length: 20 }, (_, i) => ({ col: i % 4, row: Math.floor(i / 4) }));
-const faces = ['q10', 'q13', 'q19', 'q20', 'q30', 'q18', 'q21', 'q16', 'q29', 'q17', 'q28', 'q33', 'q23', 'q05', 'q06', 'q26', 'q11', 'q07'];
-const cutouts = ['talent1', 'talent2', 'talent3', 'talent4', 'talent5'];
+// Licensed stock photos only (no generated or web-sourced faces).
+const faces = ['f-pink-skirt', 'f-headphones', 'f-yellow-suit', 'f-guitar-electric', 'f-makeup', 'f-videographer', 'f-dj', 'f-photographer', 'f-guitar-hat', 'f-guitar-acoustic', 'f-yellow-lips'];
+const cutouts = ['c-pink-skirt', 'c-guitar-electric', 'c-makeup', 'c-yellow-suit', 'c-videographer'];
 
 const apple = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.37 12.7c-.02-2.1 1.72-3.12 1.8-3.17-.98-1.43-2.5-1.63-3.04-1.65-1.29-.13-2.52.76-3.18.76-.66 0-1.67-.74-2.75-.72-1.41.02-2.72.82-3.45 2.09-1.47 2.55-.38 6.33 1.06 8.4.7 1.01 1.53 2.15 2.62 2.11 1.05-.04 1.45-.68 2.72-.68 1.27 0 1.63.68 2.74.66 1.13-.02 1.85-1.03 2.54-2.05.8-1.17 1.13-2.3 1.15-2.36-.03-.01-2.2-.85-2.21-3.39ZM14.3 6.53c.58-.7.97-1.68.86-2.65-.83.03-1.84.55-2.44 1.25-.53.62-1 1.61-.88 2.56.93.07 1.88-.47 2.46-1.16Z"/></svg>';
 const play = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.36-.2-.6-.58-.6-1.05V3.25c0-.47.24-.85.6-1.05Z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.72 2.12c.79.45.79 1.6 0 2.05l-3.72 2.43Z"/><path fill="#4285F4" d="M16.7 8.7 13.4 12 3.6 2.2c.3-.17.68-.2 1.05 0l12.05 6.5Z"/><path fill="#EA4335" d="M16.7 15.3 4.65 21.8c-.37.2-.75.17-1.05 0L13.4 12l3.3 3.3Z"/></svg>';
@@ -104,7 +105,7 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
             </div>
             <div class="toast toast--urgent" aria-hidden="true"><span class="toast__dot"><Fragment set:html={fire} /></span><b>Urgent</b> · 18 h left</div>
             <div class="toast toast--apply" aria-hidden="true">
-              <img src="/people/q13.webp" alt="" /><span><b>{lang === 'ru' ? 'Новый отклик' : 'New applicant'}</b>Angela R. · Hostess</span>
+              <img src="/people/f-pink-skirt.webp" alt="" /><span><b>{lang === 'ru' ? 'Новый отклик' : 'New applicant'}</b>Angela R. · Hostess</span>
             </div>
           </div>
         </div>
@@ -210,7 +211,7 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
 
             <article class="tile tile--team">
               <div class="faces" aria-hidden="true">
-                {['q19', 'q21', 'q16'].map((f) => <img src={`/people/${f}.webp`} alt="" loading="lazy" />)}
+                {['f-makeup', 'f-headphones', 'f-yellow-suit'].map((f) => <img src={`/people/${f}.webp`} alt="" loading="lazy" />)}
               </div>
               <h3>{t.features.team.title}</h3>
               <p>{t.features.team.text}</p>
