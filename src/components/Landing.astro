@@ -167,8 +167,10 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
                 <p>{t.features.video.text}</p>
               </div>
               <div class="tile__video" aria-hidden="true">
-                <img src="/screens/e_profile.webp" alt="" loading="lazy" />
-                <span class="playbtn"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5Z" fill="currentColor" /></svg></span>
+                <video poster="/video/presentation.webp" autoplay muted loop playsinline preload="metadata" data-loop-video>
+                  <source src="/video/presentation.mp4" type='video/mp4; codecs="avc1.4D401F"' />
+                  <source src="/video/presentation.webm" type="video/webm" />
+                </video>
               </div>
             </article>
 
@@ -404,6 +406,9 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
       window.addEventListener('resize', onStoryScroll);
       tabs.forEach((b) => b.addEventListener('click', onStoryScroll));
       roles.querySelectorAll('[data-story]').forEach((s) => s.querySelector('.step')?.classList.add('is-on'));
+
+      // Looping video presentation: hold still for reduced motion.
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll<HTMLVideoElement>('[data-loop-video]').forEach((v) => v.pause());
 
       // Urgent: a live 24-hour countdown.
       const clock = document.querySelector<HTMLElement>('[data-clock]');

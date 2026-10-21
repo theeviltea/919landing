@@ -729,37 +729,18 @@ p {
 .tile__video {
   position: relative;
   align-self: end;
-  margin-bottom: -60px;
+  margin-bottom: -24px;
   border-radius: 28px 28px 0 0;
   overflow: hidden;
   border: 8px solid #2f333b;
   border-bottom: 0;
 }
-.tile__video img {
+.tile__video video {
+  display: block;
   width: 100%;
   aspect-ratio: 390 / 600;
   object-fit: cover;
-  object-position: center 58%;
-}
-.playbtn {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  translate: -50% -50%;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: var(--blue);
-  color: #fff;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 0 0 0 rgba(63, 148, 255, 0.7);
-  animation: ping 2.4s infinite;
-}
-.playbtn svg {
-  width: 30px;
-  height: 30px;
-  translate: 2px 0;
+  background: #2f333b;
 }
 @keyframes ping {
   70% {
@@ -1402,7 +1383,7 @@ p {
     grid-template-columns: 1fr;
   }
   .tile__video {
-    margin: 8px 8% -40px;
+    margin: 8px 8% -12px;
   }
   .field {
     grid-template-columns: 1fr;
