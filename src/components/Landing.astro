@@ -167,9 +167,13 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
                 <p>{t.features.video.text}</p>
               </div>
               <div class="tile__video" aria-hidden="true">
-                <video poster="/video/presentation.webp" autoplay muted loop playsinline preload="metadata" data-loop-video>
+                <video class="is-on" poster="/video/presentation.webp" autoplay muted playsinline preload="auto" data-reel-video>
                   <source src="/video/presentation.mp4" type='video/mp4; codecs="avc1.4D401F"' />
                   <source src="/video/presentation.webm" type="video/webm" />
+                </video>
+                <video muted playsinline preload="auto" data-reel-video>
+                  <source src="/video/presentation2.mp4" type='video/mp4; codecs="avc1.4D401F"' />
+                  <source src="/video/presentation2.webm" type="video/webm" />
                 </video>
               </div>
             </article>
@@ -407,8 +411,19 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
       tabs.forEach((b) => b.addEventListener('click', onStoryScroll));
       roles.querySelectorAll('[data-story]').forEach((s) => s.querySelector('.step')?.classList.add('is-on'));
 
-      // Looping video presentation: hold still for reduced motion.
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll<HTMLVideoElement>('[data-loop-video]').forEach((v) => v.pause());
+      // Video presentations play one after another, round and round; still for reduced motion.
+      const reel = [...document.querySelectorAll<HTMLVideoElement>('[data-reel-video]')];
+      if (reduce) reel.forEach((v) => v.pause());
+      else
+        reel.forEach((v, k) =>
+          v.addEventListener('ended', () => {
+            const next = reel[(k + 1) % reel.length];
+            next.currentTime = 0;
+            next.play().catch(() => {});
+            next.classList.add('is-on');
+            if (next !== v) v.classList.remove('is-on');
+          }),
+        );
 
       // Urgent: a live 24-hour countdown.
       const clock = document.querySelector<HTMLElement>('[data-clock]');

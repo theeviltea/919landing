@@ -742,6 +742,18 @@ p {
   object-fit: cover;
   background: #2f333b;
 }
+/* Clips after the first sit on top of it and cross-fade in. */
+.tile__video video + video {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+.tile__video video:not(.is-on) {
+  opacity: 0;
+}
+.tile__video video {
+  transition: opacity 0.5s var(--ease);
+}
 @keyframes ping {
   70% {
     box-shadow: 0 0 0 22px rgba(63, 148, 255, 0);
