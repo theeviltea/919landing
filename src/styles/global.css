@@ -409,26 +409,15 @@ p {
 }
 .phone {
   position: relative;
-  border-radius: 46px;
+  /* Radii in % of the frame so small mockups get proportionally smaller corners. No notch: device-neutral. */
+  border-radius: 11.2% / 5.3%;
   background: var(--ink);
   padding: 10px;
   box-shadow: 0 40px 80px rgba(10, 30, 70, 0.35), inset 0 0 0 1.5px #3a3d45;
 }
-.phone::before {
-  content: '';
-  position: absolute;
-  top: 18px;
-  left: 50%;
-  translate: -50% 0;
-  width: 30%;
-  height: 24px;
-  border-radius: 999px;
-  background: var(--ink);
-  z-index: 2;
-}
 .phone img {
   width: 100%;
-  border-radius: 36px;
+  border-radius: 9.2% / 4.3%;
   aspect-ratio: 390 / 844;
   object-fit: cover;
   object-position: top;
@@ -1322,6 +1311,7 @@ p {
     width: 46%;
     left: -4%;
     bottom: -10%;
+    padding: 5px;
   }
   .toast--urgent {
     left: 0;
@@ -1362,15 +1352,7 @@ p {
     display: block;
     width: min(78%, 300px);
     margin: 28px auto 0;
-    border-radius: 40px;
-    padding: 8px;
-  }
-  .phone--inline::before {
-    top: 14px;
-    height: 20px;
-  }
-  .phone--inline img {
-    border-radius: 32px;
+    padding: 7px;
   }
   .features {
     border-radius: 32px;
