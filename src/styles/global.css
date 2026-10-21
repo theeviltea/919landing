@@ -577,7 +577,7 @@ p {
   justify-content: center;
   padding: 40px 0;
   opacity: 0.28;
-  transition: opacity 0.5s var(--ease);
+  transition: opacity 0.45s var(--ease);
 }
 .step.is-on {
   opacity: 1;
@@ -632,7 +632,7 @@ p {
   height: calc(100% - 20px);
   opacity: 0;
   transform: scale(1.03);
-  transition: opacity 0.6s var(--ease), transform 0.8s var(--ease);
+  transition: opacity 0.45s var(--ease), transform 0.6s var(--ease);
 }
 .phone--story img.is-on {
   opacity: 1;

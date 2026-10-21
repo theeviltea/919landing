@@ -374,21 +374,34 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
       document.querySelectorAll<HTMLAnchorElement>('[data-role-link]').forEach((a) => a.addEventListener('click', () => setRole(a.dataset.roleLink!)));
       document.querySelectorAll<HTMLAnchorElement>('a[href="#how"]:not([data-role-link])').forEach((a) => a.addEventListener('click', () => setRole('talent')));
 
-      const io = new IntersectionObserver(
-        (entries) => {
-          for (const e of entries) {
-            if (!e.isIntersecting) continue;
-            const step = e.target as HTMLElement;
-            const story = step.closest<HTMLElement>('[data-story]')!;
-            const n = step.dataset.step;
-            story.querySelectorAll('.step').forEach((s) => s.classList.toggle('is-on', s === step));
-            story.querySelectorAll<HTMLElement>('[data-shot]').forEach((img) => img.classList.toggle('is-on', img.dataset.shot === n));
-            story.querySelectorAll<HTMLElement>('[data-dot]').forEach((d) => d.classList.toggle('is-on', d.dataset.dot === n));
-          }
-        },
-        { rootMargin: '-45% 0px -45% 0px' },
-      );
-      roles.querySelectorAll('.step').forEach((s) => io.observe(s));
+      // One active step per story: the one whose text is closest to the viewport centre.
+      // Text, phone screen and dots switch together, on the same frame.
+      const setStep = (story: HTMLElement, n: string) => {
+        story.querySelectorAll<HTMLElement>('.step').forEach((s) => s.classList.toggle('is-on', s.dataset.step === n));
+        story.querySelectorAll<HTMLElement>('[data-shot]').forEach((img) => img.classList.toggle('is-on', img.dataset.shot === n));
+        story.querySelectorAll<HTMLElement>('[data-dot]').forEach((d) => d.classList.toggle('is-on', d.dataset.dot === n));
+      };
+      let ticking = false;
+      const syncSteps = () => {
+        ticking = false;
+        const mid = window.innerHeight / 2;
+        roles.querySelectorAll<HTMLElement>('[data-story]:not([hidden])').forEach((story) => {
+          let best: HTMLElement | null = null;
+          let dist = Infinity;
+          story.querySelectorAll<HTMLElement>('.step').forEach((s) => {
+            const r = (s.querySelector('.step__title') ?? s).getBoundingClientRect();
+            const d = Math.abs(r.top + r.height / 2 - mid);
+            if (d < dist) (dist = d), (best = s);
+          });
+          if (best && !(best as HTMLElement).classList.contains('is-on')) setStep(story, (best as HTMLElement).dataset.step!);
+        });
+      };
+      const onStoryScroll = () => {
+        if (!ticking) (ticking = true), requestAnimationFrame(syncSteps);
+      };
+      window.addEventListener('scroll', onStoryScroll, { passive: true });
+      window.addEventListener('resize', onStoryScroll);
+      tabs.forEach((b) => b.addEventListener('click', onStoryScroll));
       roles.querySelectorAll('[data-story]').forEach((s) => s.querySelector('.step')?.classList.add('is-on'));
 
       // Urgent: a live 24-hour countdown.
