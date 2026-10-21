@@ -717,8 +717,9 @@ p {
   grid-column: span 7;
   grid-row: span 2;
   display: grid;
-  grid-template-columns: 1fr 0.9fr;
+  grid-template-columns: 1fr auto;
   gap: 24px;
+  padding-left: 24px;
   background: radial-gradient(120% 80% at 90% 100%, rgba(63, 148, 255, 0.55), transparent 60%), var(--ink-2);
 }
 .tile--video .tile__copy {
@@ -726,33 +727,30 @@ p {
   flex-direction: column;
   gap: 12px;
 }
-.tile__video {
-  position: relative;
-  align-self: end;
-  margin-bottom: -24px;
-  border-radius: 28px 28px 0 0;
-  overflow: hidden;
-  border: 8px solid #2f333b;
-  border-bottom: 0;
+.tile__phone {
+  width: clamp(220px, 19vw, 270px);
+  align-self: center;
+  justify-self: end;
 }
-.tile__video video {
-  display: block;
-  width: 100%;
-  aspect-ratio: 390 / 600;
-  object-fit: cover;
+/* Reels play in turn and cross-fade; the screen keeps the phone's proportional corners. */
+.tile__reel {
+  position: relative;
+  aspect-ratio: 390 / 844;
+  border-radius: 9.2% / 4.3%;
+  overflow: hidden;
   background: #2f333b;
 }
-/* Clips after the first sit on top of it and cross-fade in. */
-.tile__video video + video {
+.tile__reel video {
   position: absolute;
   inset: 0;
+  width: 100%;
   height: 100%;
-}
-.tile__video video:not(.is-on) {
+  object-fit: cover;
   opacity: 0;
-}
-.tile__video video {
   transition: opacity 0.5s var(--ease);
+}
+.tile__reel video.is-on {
+  opacity: 1;
 }
 @keyframes ping {
   70% {
@@ -1394,8 +1392,10 @@ p {
   .tile--video {
     grid-template-columns: 1fr;
   }
-  .tile__video {
-    margin: 8px 8% -12px;
+  .tile__phone {
+    width: min(66%, 260px);
+    justify-self: center;
+    margin-top: 8px;
   }
   .field {
     grid-template-columns: 1fr;

@@ -166,15 +166,21 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
                 <h3>{t.features.video.title}</h3>
                 <p>{t.features.video.text}</p>
               </div>
-              <div class="tile__video" aria-hidden="true">
-                <video class="is-on" poster="/video/presentation.webp" autoplay muted playsinline preload="auto" data-reel-video>
-                  <source src="/video/presentation.mp4" type='video/mp4; codecs="avc1.4D401F"' />
-                  <source src="/video/presentation.webm" type="video/webm" />
-                </video>
-                <video muted playsinline preload="auto" data-reel-video>
-                  <source src="/video/presentation2.mp4" type='video/mp4; codecs="avc1.4D401F"' />
-                  <source src="/video/presentation2.webm" type="video/webm" />
-                </video>
+              <div class="phone tile__phone" aria-hidden="true">
+                <div class="tile__reel">
+                  <video class="is-on" poster="/video/reel-neon.webp" autoplay muted playsinline preload="auto" data-reel-video>
+                    <source src="/video/reel-neon.mp4" type='video/mp4; codecs="avc1.4D401F"' />
+                    <source src="/video/reel-neon.webm" type="video/webm" />
+                  </video>
+                  <video muted playsinline preload="auto" data-reel-video>
+                    <source src="/video/reel-desert.mp4" type='video/mp4; codecs="avc1.4D401F"' />
+                    <source src="/video/reel-desert.webm" type="video/webm" />
+                  </video>
+                  <video muted playsinline preload="auto" data-reel-video>
+                    <source src="/video/reel-drums.mp4" type='video/mp4; codecs="avc1.4D401F"' />
+                    <source src="/video/reel-drums.webm" type="video/webm" />
+                  </video>
+                </div>
               </div>
             </article>
 
