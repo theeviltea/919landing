@@ -59,15 +59,16 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
           <button class="nav__burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu" data-burger><span></span><span></span></button>
         </div>
       </div>
-      <div class="menu" id="menu" hidden data-menu>
-        <a href="#how">{t.nav.talent}</a>
-        <a href="#how" data-role-link="employer">{t.nav.employers}</a>
-        <a href="#features">{t.nav.features}</a>
-        <a href="#pricing">{t.nav.pricing}</a>
-        <a href="#faq">{t.nav.faq}</a>
-        <a href={t.nav.langHref}>{lang === 'ru' ? 'English' : 'Русский'}</a>
-      </div>
     </header>
+    <!-- Outside the header: its backdrop-filter would trap a fixed child. -->
+    <div class="menu" id="menu" hidden data-menu>
+      <a href="#how">{t.nav.talent}</a>
+      <a href="#how" data-role-link="employer">{t.nav.employers}</a>
+      <a href="#features">{t.nav.features}</a>
+      <a href="#pricing">{t.nav.pricing}</a>
+      <a href="#faq">{t.nav.faq}</a>
+      <a href={t.nav.langHref}>{lang === 'ru' ? 'English' : 'Русский'}</a>
+    </div>
 
     <main id="main">
       <!-- Hero -->
