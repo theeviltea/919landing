@@ -36,17 +36,17 @@ const en = {
     employerTab: 'I’m hiring',
     talent: [
       { title: 'Build a profile once', text: 'Choose your fields — as many as you work in — add photos and a short video presentation. Employers see you exactly as you are.', screen: 't_profile', alt: 'Talent profile with photos and fields' },
-      { title: 'Find the right shift', text: 'A feed of real vacancies with pay, contract type and start date. Filter by city, field and rate, or open the Urgent tab for shifts that start today.', screen: 't_feed', alt: 'Vacancy feed with Urgent filter' },
+      { title: 'Find the right job', text: 'A feed of real vacancies with pay, contract type and start date. Filter by city, field and rate, or open the Urgent tab for jobs that start today.', screen: 't_feed', alt: 'Vacancy feed with Urgent filter' },
       { title: 'Apply in one tap', text: 'See what the employer asks for and how well you fit before you apply. Add a short note if you want to stand out.', screen: 't_vacancy', alt: 'Vacancy page' },
       { title: 'Talk to the employer', text: 'When the employer accepts your application, a chat opens. Agree on the time and dress code, share your contact or location.', screen: 't_chat', alt: 'Chat with an employer' },
-      { title: 'Get hired', text: 'Once the employer confirms you, you get a notification and the job moves to Active with the date and time of your shift. The chat is one tap away.', screen: 't_hired', alt: 'Vacancy with the “You’re hired” status' },
+      { title: 'Get hired', text: 'Once the employer confirms you, you get a notification and the job moves to Active with the date and time you start. The chat is one tap away.', screen: 't_hired', alt: 'Vacancy with the “You’re hired” status' },
     ] as Step[],
     employer: [
       { title: 'Post a vacancy in four steps', text: 'Field and role, basic info with photos, pay, then requirements that depend on the role — height for models, genre for DJs, languages for hosts.', screen: 'e_post', alt: 'New vacancy, step one' },
       { title: 'We check it within an hour', text: 'The 919 team reviews every vacancy before it goes live. If something needs fixing, you get a clear list of what to change.', screen: 'e_hub', alt: 'Vacancies with moderation results' },
       { title: 'Pick from real applicants', text: 'Each applicant comes with photos, languages, experience and often a video. Compare them side by side and open any profile in a tap.', screen: 'e_applicants', alt: 'Applicants of a vacancy' },
       { title: 'Confirm your candidates', text: 'Accept the people you want in one tap. They get a notification and a chat with you, and everyone you decline gets a polite notice, so nobody is left waiting.', screen: 'e_accepted', alt: 'Accepted candidates of a vacancy' },
-      { title: 'Chat and agree on the shift', text: 'One chat per candidate, split by vacancy, so a DJ booking never mixes with a hostess shift. Or find talent yourself and write first.', screen: 'e_chat', alt: 'Chat with a candidate' },
+      { title: 'Chat and agree on the details', text: 'One chat per candidate, split by vacancy, so a DJ booking never mixes with a hostess job. Or find talent yourself and write first.', screen: 'e_chat', alt: 'Chat with a candidate' },
     ] as Step[],
   },
   features: {
@@ -91,7 +91,7 @@ const en = {
       ['Where does 919 work?', 'In the UAE first — Dubai, Abu Dhabi, Sharjah — with vacancies in Saudi Arabia and Qatar too.'],
     ] as [string, string][],
   },
-  cta: { title: 'Your next shift is already posted', text: 'Download 919 and see it today.' },
+  cta: { title: 'Your next job is already posted', text: 'Download 919 and see it today.' },
   footer: { rights: '© 919 App, 2026', contact: 'Write to us', top: 'Back to top' },
 };
 
@@ -117,17 +117,17 @@ const ru: typeof en = {
     employerTab: 'Ищу людей',
     talent: [
       { title: 'Один раз заполни профиль', text: 'Выбери сферы — сколько угодно, — добавь фото и короткую видеопрезентацию. Работодатель увидит тебя таким, какой ты есть.', screen: 't_profile', alt: 'Профиль соискателя с фото и сферами' },
-      { title: 'Найди подходящую смену', text: 'Лента настоящих вакансий с оплатой, типом контракта и датой старта. Фильтры по городу, сфере и ставке, а во вкладке Urgent — смены, которые начинаются сегодня.', screen: 't_feed', alt: 'Лента вакансий с фильтром Urgent' },
+      { title: 'Найди подходящую работу', text: 'Лента настоящих вакансий с оплатой, типом контракта и датой старта. Фильтры по городу, сфере и ставке, а во вкладке Urgent — работа, которая начинается сегодня.', screen: 't_feed', alt: 'Лента вакансий с фильтром Urgent' },
       { title: 'Откликнись в один тап', text: 'До отклика видно, что просит работодатель и насколько ты подходишь. Можно добавить короткое сообщение, чтобы выделиться.', screen: 't_vacancy', alt: 'Страница вакансии' },
       { title: 'Договорись с работодателем', text: 'Когда работодатель принимает отклик, открывается чат. Обсуди время и дресс-код, отправь контакт или адрес.', screen: 't_chat', alt: 'Чат с работодателем' },
-      { title: 'Тебя наняли', text: 'Когда работодатель подтверждает тебя, приходит уведомление, а вакансия переезжает во вкладку Active с датой и временем смены. Чат — в один тап.', screen: 't_hired', alt: 'Вакансия со статусом «You’re hired»' },
+      { title: 'Тебя наняли', text: 'Когда работодатель подтверждает тебя, приходит уведомление, а вакансия переезжает во вкладку Active с датой и временем выхода. Чат — в один тап.', screen: 't_hired', alt: 'Вакансия со статусом «You’re hired»' },
     ],
     employer: [
       { title: 'Вакансия за четыре шага', text: 'Сфера и роль, описание с фото, оплата и требования под роль — рост для моделей, жанр для диджеев, языки для хостес.', screen: 'e_post', alt: 'Новая вакансия, первый шаг' },
       { title: 'Проверим в течение часа', text: 'Команда 919 смотрит каждую вакансию до публикации. Если что-то не так, придёт понятный список правок.', screen: 'e_hub', alt: 'Вакансии с результатами модерации' },
       { title: 'Выбирай из живых откликов', text: 'У каждого кандидата фото, языки, опыт и часто видео. Сравнивай их и открывай любой профиль в один тап.', screen: 'e_applicants', alt: 'Отклики на вакансию' },
       { title: 'Подтверди кандидатов', text: 'Прими тех, кто подходит, в один тап. Им придёт уведомление и откроется чат с тобой, а отклонённые получат вежливый ответ — никто не ждёт впустую.', screen: 'e_accepted', alt: 'Принятые кандидаты по вакансии' },
-      { title: 'Договорись о смене', text: 'Один чат на кандидата, внутри — отдельные ветки по вакансиям, чтобы букинг диджея не смешался со сменой хостес. Или найди таланты сам и напиши первым.', screen: 'e_chat', alt: 'Чат с кандидатом' },
+      { title: 'Договорись о деталях', text: 'Один чат на кандидата, внутри — отдельные ветки по вакансиям, чтобы букинг диджея не смешался с вакансией хостес. Или найди таланты сам и напиши первым.', screen: 'e_chat', alt: 'Чат с кандидатом' },
     ],
   },
   features: {
@@ -172,7 +172,7 @@ const ru: typeof en = {
       ['Где работает 919?', 'В первую очередь в ОАЭ — Дубай, Абу-Даби, Шарджа, — а также есть вакансии в Саудовской Аравии и Катаре.'],
     ],
   },
-  cta: { title: 'Твоя следующая смена уже опубликована', text: 'Скачай 919 и посмотри сегодня.' },
+  cta: { title: 'Твоя следующая работа уже опубликована', text: 'Скачай 919 и посмотри сегодня.' },
   footer: { rights: '© 919 App, 2026', contact: 'Написать нам', top: 'Наверх' },
 };
 
