@@ -35,6 +35,9 @@ const availFaces = [
   { f: 'f-headphones', name: 'Karim A.' },
 ];
 const plans = { talent: t.pricing.talent, employer: t.pricing.employer };
+// The 3D pieces of the 919 pattern, several of each, for the fly-through behind "One app, two sides".
+const shapeNames = ['arc', 'square', 'triangle', 'ring', 'star8', 'star5', 'flower', 'rhombus', 'corner'];
+const flight = Array.from({ length: 27 }, (_, i) => shapeNames[(i * 4) % shapeNames.length]);
 ---
 
 <!doctype html>
@@ -131,6 +134,12 @@ const plans = { talent: t.pricing.talent, employer: t.pricing.employer };
 
       <!-- Roles: scroll story -->
       <section class="roles" id="how" aria-labelledby="roles-title" data-roles data-role="talent">
+        <!-- Pattern shapes fly towards the viewer as the section scrolls. -->
+        <div class="flight" aria-hidden="true">
+          <div class="flight__view" data-flight>
+            {flight.map((f) => <img src={`/img/shapes/${f}.webp`} alt="" decoding="async" />)}
+          </div>
+        </div>
         <div class="wrap">
           <div class="roles__head">
             <h2 id="roles-title" class="h2">{t.roles.title}</h2>
@@ -458,6 +467,61 @@ const plans = { talent: t.pricing.talent, employer: t.pricing.employer };
           setTimeout(() => [0, 5, 10].forEach((i) => (cells[i].classList.remove('is-flipped'), setTimeout(() => busy.delete(cells[i]), 700))), 3200);
         }, 900);
         setInterval(flip, 650);
+      }
+
+      // Fly-through: shapes sit at random depths and move towards the viewer as the section scrolls,
+      // looping from far to near. Perspective projection: size and spread grow as 1 / depth.
+      const flightView = document.querySelector<HTMLElement>('[data-flight]');
+      if (flightView) {
+        const section = flightView.closest('section')!;
+        const imgs = [...flightView.querySelectorAll<HTMLImageElement>('img')];
+        let seed = 7;
+        const rnd = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+        const parts = imgs.map((el, i) => {
+          // Keep the middle column clear-ish so the shapes don't sit right under the text when near.
+          let x = rnd() * 2 - 1;
+          if (Math.abs(x) < 0.25) x = Math.sign(x || 1) * (0.25 + rnd() * 0.3);
+          return { el, x, y: rnd() * 2 - 1, z: (i + rnd()) / imgs.length, size: 0.6 + rnd() * 0.9, rot: rnd() * 360, spin: (rnd() - 0.5) * 120, flip: rnd() < 0.5 ? -1 : 1, tilt: (rnd() - 0.5) * 50 };
+        });
+        let visible = false;
+        const draw = () => {
+          const r = section.getBoundingClientRect();
+          const W = flightView.clientWidth;
+          const H = flightView.clientHeight;
+          // 0 when the section enters from below, grows with scroll; one full flight every 1.6 screens.
+          const prog = (window.innerHeight - r.top) / (window.innerHeight * 1.6);
+          const base = Math.min(W, 900) * 0.11;
+          for (const p of parts) {
+            let d = (((p.z - prog) % 1) + 1) % 1; // 1 = far, 0 = at the viewer
+            d = 0.06 + d * 0.94;
+            const k = 0.18 / d;
+            const px = W / 2 + p.x * W * 0.42 * k * 2.2;
+            const py = H / 2 + p.y * H * 0.38 * k * 2.2;
+            const size = base * p.size * k * 2;
+            const fadeIn = Math.min(1, (1 - d) / 0.25);
+            const fadeOut = Math.min(1, (d - 0.06) / 0.16);
+            const o = Math.max(0, Math.min(fadeIn, fadeOut));
+            const rot = p.rot + p.spin * (1 - d);
+            p.el.style.width = `${size}px`;
+            p.el.style.opacity = String(o * 0.95);
+            p.el.style.zIndex = String(Math.round((1 - d) * 100));
+            p.el.style.transform = `translate3d(${px - size / 2}px, ${py - size / 2}px, 0) rotate(${rot}deg) rotateX(${p.tilt * (1 - d)}deg) scaleX(${p.flip})`;
+          }
+        };
+        const loop = () => {
+          if (!visible) return;
+          draw();
+          requestAnimationFrame(loop);
+        };
+        draw();
+        if (!reduce)
+          new IntersectionObserver((es) =>
+            es.forEach((e) => {
+              const was = visible;
+              visible = e.isIntersecting;
+              if (visible && !was) requestAnimationFrame(loop);
+            }),
+          ).observe(section);
       }
 
       // Roles: switch sides; the phone follows the step in view.

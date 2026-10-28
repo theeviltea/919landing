@@ -586,6 +586,40 @@ p {
 .roles {
   padding: clamp(80px, 11vw, 150px) 0 40px;
 }
+/* Fly-through behind "One app, two sides": a sticky viewport the size of the screen inside the section. */
+.roles {
+  position: relative;
+}
+.roles > .wrap {
+  position: relative;
+  z-index: 1;
+}
+.flight {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  pointer-events: none;
+  /* Soft fade at the section's top and bottom edges. */
+  -webkit-mask: linear-gradient(transparent, #000 120px, #000 calc(100% - 160px), transparent);
+  mask: linear-gradient(transparent, #000 120px, #000 calc(100% - 160px), transparent);
+}
+.flight__view {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  perspective: 900px;
+}
+.flight__view img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: none;
+  height: auto;
+  opacity: 0;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 18px 28px rgba(30, 60, 120, 0.16));
+}
 .roles__head {
   display: grid;
   /* Same columns as .story so the switch and the phone share one centre line. */
