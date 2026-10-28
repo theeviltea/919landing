@@ -481,7 +481,7 @@ const flight = Array.from({ length: 27 }, (_, i) => shapeNames[(i * 4) % shapeNa
           // Keep the middle column clear-ish so the shapes don't sit right under the text when near.
           let x = rnd() * 2 - 1;
           if (Math.abs(x) < 0.25) x = Math.sign(x || 1) * (0.25 + rnd() * 0.3);
-          return { el, x, y: rnd() * 2 - 1, z: (i + rnd()) / imgs.length, size: 0.6 + rnd() * 0.9, rot: rnd() * 360, spin: (rnd() - 0.5) * 120, flip: rnd() < 0.5 ? -1 : 1, tilt: (rnd() - 0.5) * 50 };
+          return { el, x, y: rnd() * 2 - 1, z: (i + rnd()) / imgs.length, size: 0.6 + rnd() * 0.9, rot: rnd() * 360, spin: (rnd() - 0.5) * 40, flip: rnd() < 0.5 ? -1 : 1, tilt: (rnd() - 0.5) * 16 };
         });
         let visible = false;
         const draw = () => {
@@ -493,17 +493,17 @@ const flight = Array.from({ length: 27 }, (_, i) => shapeNames[(i * 4) % shapeNa
           const base = Math.min(W, 900) * 0.11;
           for (const p of parts) {
             let d = (((p.z - prog) % 1) + 1) % 1; // 1 = far, 0 = at the viewer
-            d = 0.06 + d * 0.94;
+            d = 0.14 + d * 0.86;
             const k = 0.18 / d;
             const px = W / 2 + p.x * W * 0.42 * k * 2.2;
             const py = H / 2 + p.y * H * 0.38 * k * 2.2;
             const size = base * p.size * k * 2;
             const fadeIn = Math.min(1, (1 - d) / 0.25);
-            const fadeOut = Math.min(1, (d - 0.06) / 0.16);
+            const fadeOut = Math.min(1, (d - 0.14) / 0.16);
             const o = Math.max(0, Math.min(fadeIn, fadeOut));
             const rot = p.rot + p.spin * (1 - d);
             p.el.style.width = `${size}px`;
-            p.el.style.opacity = String(o * 0.95);
+            p.el.style.opacity = String(o * 0.4);
             p.el.style.zIndex = String(Math.round((1 - d) * 100));
             p.el.style.transform = `translate3d(${px - size / 2}px, ${py - size / 2}px, 0) rotate(${rot}deg) rotateX(${p.tilt * (1 - d)}deg) scaleX(${p.flip})`;
           }
