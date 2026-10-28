@@ -846,6 +846,169 @@ p {
   color: var(--green);
   transform: scale(1.06);
 }
+.state svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+.state.is-on.state--2 {
+  background: #e2efff;
+  color: #1f6fd9;
+}
+/* Available today: a light tile — the switch turns on, people pop in with their "Today" pill */
+.tile--avail {
+  grid-column: span 12;
+  background: #fff;
+  color: var(--ink);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 32px;
+  align-items: center;
+}
+.tile--avail p {
+  color: var(--muted);
+}
+.avail__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.badge-avail {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px 0 8px;
+  border-radius: 999px;
+  background: var(--urgent);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 14px;
+}
+.badge-avail svg,
+.avail__ic svg,
+.avail__pill svg {
+  width: 18px;
+  height: 18px;
+}
+.avail__demo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.avail__toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 20px;
+  background: var(--paper);
+  transition: background 0.5s var(--ease);
+}
+.avail__ic {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--urgent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avail__txt {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+.avail__txt b {
+  font-size: 15px;
+}
+.avail__txt small {
+  font-size: 13px;
+  color: var(--muted);
+}
+.avail__sw {
+  flex: none;
+  position: relative;
+  width: 44px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--line);
+  transition: background 0.4s;
+}
+.avail__sw i {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(14, 26, 43, 0.2);
+  transition: transform 0.4s var(--ease);
+}
+.tile--avail.is-on .avail__toggle {
+  background: #fff6d6;
+}
+.tile--avail.is-on .avail__sw {
+  background: var(--blue);
+}
+.tile--avail.is-on .avail__sw i {
+  transform: translateX(18px);
+}
+.avail__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.avail__card {
+  position: relative;
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--paper);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  transition-delay: calc(0.35s + var(--i) * 0.12s);
+}
+.tile--avail.is-on .avail__card {
+  opacity: 1;
+  transform: none;
+}
+.avail__card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 25%;
+}
+.avail__pill {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 24px;
+  padding: 0 8px 0 6px;
+  border-radius: 999px;
+  background: var(--urgent);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.avail__pill svg {
+  width: 13px;
+  height: 13px;
+}
+.avail__card figcaption {
+  padding: 8px 10px 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
 .tile--chats {
   grid-column: span 7;
 }
@@ -945,11 +1108,56 @@ p {
   padding: 0 0 clamp(80px, 11vw, 150px);
 }
 .pricing__head {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px 48px;
   align-items: end;
-  gap: 24px;
-  flex-wrap: wrap;
+}
+.pricing__head .lead {
+  grid-column: 1;
+}
+.switch--plans {
+  justify-self: end;
+}
+[data-side='employer'] .switch__pill {
+  transform: translateX(100%);
+  background: var(--blue);
+}
+.plan__name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.plan__badge {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.plan__badge svg {
+  width: 15px;
+  height: 15px;
+}
+.plan__badge--premium {
+  background: var(--blue);
+}
+.plan__badge--max {
+  background: linear-gradient(135deg, #ffd84d, #ff9f1a);
+}
+.plan__badge--urgent {
+  background: var(--urgent);
+  color: var(--ink);
+}
+.plans[hidden] {
+  display: none;
+}
+.plan--featured.plan--max .plan__name,
+.plan--featured.plan--max li svg {
+  color: #ffc23d;
 }
 .plans {
   margin-top: 48px;
@@ -1241,6 +1449,9 @@ p {
   .tile--team {
     grid-column: span 3;
   }
+  .tile--avail {
+    grid-column: span 6;
+  }
   .faq__in {
     grid-template-columns: 1fr;
   }
@@ -1346,9 +1557,26 @@ p {
   .tile--video,
   .tile--urgent,
   .tile--mod,
+  .tile--avail,
   .tile--chats,
   .tile--team {
     grid-column: auto;
+  }
+  .tile--avail {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .avail__today {
+    display: none;
+  }
+  .avail__cards {
+    gap: 8px;
+  }
+  .pricing__head {
+    grid-template-columns: 1fr;
+  }
+  .switch--plans {
+    justify-self: stretch;
   }
   .tile {
     padding: 24px;

@@ -22,6 +22,14 @@ const play = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d
 const check = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const fire = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.5c3.9 0 6.75-2.7 6.75-6.5 0-3.2-2-5.8-3.6-7.4-.45-.45-1.2-.13-1.2.5 0 1.2-.75 2.4-1.9 2.4-1.3 0-1.85-1.25-1.55-2.75.3-1.55.1-3.4-1.25-4.85-.4-.4-1.05-.2-1.15.35C7.7 6.1 5.25 8.5 5.25 13.4c0 4.7 2.85 8.1 6.75 8.1Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
 const steps = { talent: t.roles.talent, employer: t.roles.employer };
+const flash = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.22 2.35 5.23 11.33c-.51.66-.1 1.68.67 1.68h3.4c.5 0 .9.46.9 1.02v6.95c0 .94 1.03 1.38 1.58.67l7-8.98c.5-.66.1-1.69-.68-1.69h-3.4c-.5 0-.9-.45-.9-1.01V3.02c0-.94-1.03-1.38-1.58-.67Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+const star = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.6l2.2 4.5 4.9.7-3.6 3.5.9 4.9L12 15.9l-4.4 2.3.9-4.9-3.6-3.5 4.9-.7L12 4.6Z" fill="currentColor"/></svg>';
+const availFaces = [
+  { f: 'f-pink-skirt', name: 'Layla H.' },
+  { f: 'f-yellow-lips', name: 'Zara K.' },
+  { f: 'f-headphones', name: 'Karim A.' },
+];
+const plans = { talent: t.pricing.talent, employer: t.pricing.employer };
 ---
 
 <!doctype html>
@@ -104,7 +112,7 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
             </div>
             <div class="toast toast--urgent" aria-hidden="true"><span class="toast__dot"><Fragment set:html={fire} /></span><b>Urgent hiring</b></div>
             <div class="toast toast--apply" aria-hidden="true">
-              <img src="/people/f-pink-skirt.webp" alt="" /><span><b>{lang === 'ru' ? 'Новый отклик' : 'New applicant'}</b>Angela R. · Hostess</span>
+              <img src="/people/f-pink-skirt.webp" alt="" /><span><b>{lang === 'ru' ? 'Новый отклик' : 'New applicant'}</b>Layla H. · Hostess</span>
             </div>
           </div>
         </div>
@@ -194,10 +202,39 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
 
             <article class="tile tile--mod">
               <div class="states" aria-hidden="true" data-states>
-                {t.features.moderation.states.map((s, i) => <span class={`state state--${i}`}>{s}</span>)}
+                {t.features.moderation.states.map((s, i) => (
+                  <span class={`state state--${i}`}>
+                    {i === 2 ? <Fragment set:html={check} /> : null}
+                    {s}
+                  </span>
+                ))}
               </div>
               <h3>{t.features.moderation.title}</h3>
               <p>{t.features.moderation.text}</p>
+            </article>
+
+            <article class="tile tile--avail">
+              <div class="avail__copy">
+                <span class="badge-avail"><Fragment set:html={flash} />Available today</span>
+                <h3>{t.features.avail.title}</h3>
+                <p>{t.features.avail.text}</p>
+              </div>
+              <div class="avail__demo" aria-hidden="true">
+                <div class="avail__toggle" data-avail>
+                  <span class="avail__ic"><Fragment set:html={flash} /></span>
+                  <span class="avail__txt"><b>{t.features.avail.toggle}</b><small>{t.features.avail.sub}</small></span>
+                  <span class="avail__sw"><i></i></span>
+                </div>
+                <div class="avail__cards">
+                  {availFaces.map((x, i) => (
+                    <figure class="avail__card" style={`--i:${i}`}>
+                      <img src={`/people/${x.f}.webp`} alt="" loading="lazy" decoding="async" />
+                      <span class="avail__pill"><Fragment set:html={flash} /><span class="avail__today">Today · </span>{t.features.avail.when[i]}</span>
+                      <figcaption>{x.name}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </div>
             </article>
 
             <article class="tile tile--chats">
@@ -245,32 +282,42 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
           <div class="pricing__head">
             <h2 id="pricing-title" class="h2">{t.pricing.title}</h2>
             <p class="lead">{t.pricing.lead}</p>
+            <div class="switch switch--plans" role="tablist" aria-label={t.pricing.title} data-plans-switch>
+              <button role="tab" aria-selected="true" data-plan-tab="talent">{t.pricing.talentTab}</button>
+              <button role="tab" aria-selected="false" data-plan-tab="employer">{t.pricing.employerTab}</button>
+              <span class="switch__pill" aria-hidden="true"></span>
+            </div>
           </div>
-          <div class="plans">
-            {
-              t.pricing.plans.map((p) => (
-                <article class={`plan ${'featured' in p && p.featured ? 'plan--featured' : ''}`}>
-                  <h3 class="plan__name">{p.name}</h3>
-                  <p class="plan__price">
-                    {p.price}
-                    {p.per ? <small>{p.per}</small> : null}
-                  </p>
-                  <ul>
-                    {p.points.map((x) => (
-                      <li>
-                        <Fragment set:html={check} />
-                        {x}
-                      </li>
-                    ))}
-                  </ul>
-                  <a class={`btn ${'featured' in p && p.featured ? 'btn--light' : 'btn--ink'}`} href="#download">
-                    {p.cta}
-                  </a>
-                </article>
-              ))
-            }
-          </div>
-          <p class="addon"><span class="addon__ic"><Fragment set:html={fire} /></span>{t.pricing.addon}</p>
+          {
+            (['talent', 'employer'] as const).map((side) => (
+              <div class="plans" data-plans={side} hidden={side === 'employer'}>
+                {plans[side].map((p) => (
+                  <article class={`plan ${p.featured ? 'plan--featured' : ''} ${p.badge === 'max' ? 'plan--max' : ''} ${p.urgent ? 'plan--urgent' : ''}`}>
+                    <h3 class="plan__name">
+                      {p.badge ? <span class={`plan__badge plan__badge--${p.badge}`}><Fragment set:html={star} /></span> : null}
+                      {p.urgent ? <span class="plan__badge plan__badge--urgent"><Fragment set:html={fire} /></span> : null}
+                      {p.name}
+                    </h3>
+                    <p class="plan__price">
+                      {p.price}
+                      {p.per ? <small>{p.per}</small> : null}
+                    </p>
+                    <ul>
+                      {p.points.map((x) => (
+                        <li>
+                          <Fragment set:html={check} />
+                          {x}
+                        </li>
+                      ))}
+                    </ul>
+                    <a class={`btn ${p.featured ? 'btn--light' : 'btn--ink'}`} href="#download">
+                      {p.cta}
+                    </a>
+                  </article>
+                ))}
+              </div>
+            ))
+          }
         </div>
       </section>
 
@@ -434,6 +481,37 @@ const steps = { talent: t.roles.talent, employer: t.roles.employer };
             if (next !== v) v.classList.remove('is-on');
           }),
         );
+
+      // Pricing: talent / employer plans.
+      const plansSwitch = document.querySelector<HTMLElement>('[data-plans-switch]');
+      if (plansSwitch) {
+        const ptabs = [...plansSwitch.querySelectorAll<HTMLButtonElement>('[data-plan-tab]')];
+        ptabs.forEach((b) =>
+          b.addEventListener('click', () => {
+            const side = b.dataset.planTab!;
+            plansSwitch.dataset.side = side;
+            ptabs.forEach((x) => x.setAttribute('aria-selected', String(x === b)));
+            document.querySelectorAll<HTMLElement>('[data-plans]').forEach((g) => (g.hidden = g.dataset.plans !== side));
+          }),
+        );
+      }
+
+      // Available today: the switch turns on when the tile scrolls into view, then the cards pop in.
+      const avail = document.querySelector<HTMLElement>('[data-avail]');
+      if (avail) {
+        const tile = avail.closest('.tile')!;
+        if (reduce) tile.classList.add('is-on');
+        else
+          new IntersectionObserver(
+            (es, o) =>
+              es.forEach((e) => {
+                if (!e.isIntersecting) return;
+                setTimeout(() => tile.classList.add('is-on'), 500);
+                o.disconnect();
+              }),
+            { threshold: 0.5 },
+          ).observe(tile);
+      }
 
       // Urgent: a live 24-hour countdown.
       const clock = document.querySelector<HTMLElement>('[data-clock]');
