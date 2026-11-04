@@ -68,7 +68,7 @@ const flight = Array.from({ length: 27 }, (_, i) => shapeNames[(i * 4) % shapeNa
           <a href="#features">{t.nav.features}</a>
           <a href="#pricing">{t.nav.pricing}</a>
           <a href="#faq">{t.nav.faq}</a>
-          <a href={WEB_URL} class="nav__web">{t.nav.web}<span aria-hidden="true">↗</span></a>
+          <a href={WEB_URL} class="nav__web" target="_blank" rel="noopener">{t.nav.web}<span aria-hidden="true">↗</span></a>
         </nav>
         <div class="nav__end">
           <a class="nav__lang" href={t.nav.langHref} hreflang={lang === 'ru' ? 'en' : 'ru'}>{t.nav.lang}</a>
@@ -84,7 +84,7 @@ const flight = Array.from({ length: 27 }, (_, i) => shapeNames[(i * 4) % shapeNa
       <a href="#features">{t.nav.features}</a>
       <a href="#pricing">{t.nav.pricing}</a>
       <a href="#faq">{t.nav.faq}</a>
-      <a href={WEB_URL}>{t.nav.web} ↗</a>
+      <a href={WEB_URL} target="_blank" rel="noopener">{t.nav.web} ↗</a>
       <a href={t.nav.langHref}>{lang === 'ru' ? 'English' : 'Русский'}</a>
     </div>
 
@@ -388,28 +388,21 @@ const flight = Array.from({ length: 27 }, (_, i) => shapeNames[(i * 4) % shapeNa
 
       <!-- Back to the web app -->
       <section class="webx" aria-labelledby="web-title">
-        <a class="webx__card" href={WEB_URL}>
-          <span class="webx__bg" aria-hidden="true"></span>
-          <div class="webx__copy">
+        <a class="webx__card" href={WEB_URL} target="_blank" rel="noopener">
+          <span class="webx__art" aria-hidden="true">
+            <img class="webx__shape s1" src="/img/shapes/star8.webp" alt="" />
+            <img class="webx__shape s2" src="/img/shapes/ring.webp" alt="" />
+            <span class="webx__browser">
+              <span class="webx__bar"><i></i><i></i><i></i><span>{t.web.url}</span></span>
+              <span class="webx__screen"><img src="/img/web-home.webp" alt="" loading="lazy" /></span>
+            </span>
+          </span>
+          <span class="webx__copy">
             <span class="webx__tag">{t.web.tag}</span>
             <h2 id="web-title" class="webx__title" data-text={t.web.title}>{t.web.title}</h2>
             <p>{t.web.text}</p>
-            <span class="webx__cta">{t.web.cta}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-          <div class="webx__art" aria-hidden="true">
-            <img class="webx__shape s1" src="/img/shapes/star8.webp" alt="" />
-            <img class="webx__shape s2" src="/img/shapes/ring.webp" alt="" />
-            <img class="webx__shape s3" src="/img/shapes/flower.webp" alt="" />
-            <div class="webx__browser">
-              <div class="webx__bar"><i></i><i></i><i></i><span>{t.web.url}</span></div>
-              <div class="webx__screen"><img src="/img/web-home.webp" alt="" loading="lazy" /></div>
-            </div>
-          </div>
-          <div class="webx__ticker" aria-hidden="true">
-            <div class="webx__track">
-              {[0, 1].map(() => t.web.ticker.map((w) => <span>{w}<i>✦</i></span>))}
-            </div>
-          </div>
+          </span>
+          <span class="webx__cta">{t.web.cta}<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </a>
       </section>
     </main>

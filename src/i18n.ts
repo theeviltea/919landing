@@ -116,10 +116,9 @@ const en = {
   web: {
     tag: '919 Web',
     title: 'No app? No problem.',
-    text: 'Vacancies, talent and messages right in the browser — on a laptop at work or a phone without space for one more app.',
+    text: 'Vacancies, talent and messages right in the browser.',
     cta: 'Open 919 Web',
     url: '919.ae',
-    ticker: ['Find work', 'Find people', 'No download', 'Any browser', 'Dubai', 'Abu Dhabi'],
   },
   footer: { rights: '© 919 App, 2026', contact: 'Write to us', top: 'Back to top' },
 };
@@ -222,10 +221,9 @@ const ru: typeof en = {
   web: {
     tag: '919 Web',
     title: 'Без приложения? Без проблем.',
-    text: 'Вакансии, таланты и сообщения прямо в браузере — на ноутбуке на работе или на телефоне, где нет места ещё для одного приложения.',
+    text: 'Вакансии, таланты и сообщения прямо в браузере.',
     cta: 'Открыть 919 Web',
     url: '919.ae',
-    ticker: ['Найди работу', 'Найди людей', 'Без скачивания', 'Любой браузер', 'Дубай', 'Абу-Даби'],
   },
   footer: { rights: '© 919 App, 2026', contact: 'Написать нам', top: 'Наверх' },
 };
