@@ -3,7 +3,7 @@ import '@fontsource-variable/unbounded';
 import '@fontsource-variable/onest';
 import '../styles/global.css';
 import fs from 'node:fs';
-import { copy, SOCIAL, STORE, type Lang } from '../i18n';
+import { copy, SOCIAL, STORE, WEB_URL, type Lang } from '../i18n';
 
 interface Props {
   lang: Lang;
@@ -68,6 +68,7 @@ const flight = Array.from({ length: 27 }, (_, i) => shapeNames[(i * 4) % shapeNa
           <a href="#features">{t.nav.features}</a>
           <a href="#pricing">{t.nav.pricing}</a>
           <a href="#faq">{t.nav.faq}</a>
+          <a href={WEB_URL} class="nav__web">{t.nav.web}<span aria-hidden="true">↗</span></a>
         </nav>
         <div class="nav__end">
           <a class="nav__lang" href={t.nav.langHref} hreflang={lang === 'ru' ? 'en' : 'ru'}>{t.nav.lang}</a>
@@ -83,6 +84,7 @@ const flight = Array.from({ length: 27 }, (_, i) => shapeNames[(i * 4) % shapeNa
       <a href="#features">{t.nav.features}</a>
       <a href="#pricing">{t.nav.pricing}</a>
       <a href="#faq">{t.nav.faq}</a>
+      <a href={WEB_URL}>{t.nav.web} ↗</a>
       <a href={t.nav.langHref}>{lang === 'ru' ? 'English' : 'Русский'}</a>
     </div>
 
@@ -383,6 +385,33 @@ const flight = Array.from({ length: 27 }, (_, i) => shapeNames[(i * 4) % shapeNa
           </div>
         </div>
       </section>
+
+      <!-- Back to the web app -->
+      <section class="webx" aria-labelledby="web-title">
+        <a class="webx__card" href={WEB_URL}>
+          <span class="webx__bg" aria-hidden="true"></span>
+          <div class="webx__copy">
+            <span class="webx__tag">{t.web.tag}</span>
+            <h2 id="web-title" class="webx__title" data-text={t.web.title}>{t.web.title}</h2>
+            <p>{t.web.text}</p>
+            <span class="webx__cta">{t.web.cta}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+          <div class="webx__art" aria-hidden="true">
+            <img class="webx__shape s1" src="/img/shapes/star8.webp" alt="" />
+            <img class="webx__shape s2" src="/img/shapes/ring.webp" alt="" />
+            <img class="webx__shape s3" src="/img/shapes/flower.webp" alt="" />
+            <div class="webx__browser">
+              <div class="webx__bar"><i></i><i></i><i></i><span>{t.web.url}</span></div>
+              <div class="webx__screen"><img src="/img/web-home.webp" alt="" loading="lazy" /></div>
+            </div>
+          </div>
+          <div class="webx__ticker" aria-hidden="true">
+            <div class="webx__track">
+              {[0, 1].map(() => t.web.ticker.map((w) => <span>{w}<i>✦</i></span>))}
+            </div>
+          </div>
+        </a>
+      </section>
     </main>
 
     <footer class="foot">
@@ -393,6 +422,7 @@ const flight = Array.from({ length: 27 }, (_, i) => shapeNames[(i * 4) % shapeNa
           <a href="#how" data-role-link="employer">{t.nav.employers}</a>
           <a href="#pricing">{t.nav.pricing}</a>
           <a href="#faq">{t.nav.faq}</a>
+          <a href={WEB_URL}>{t.nav.web}</a>
           <a href={t.nav.langHref}>{lang === 'ru' ? 'English' : 'Русский'}</a>
         </nav>
         <div class="foot__social">

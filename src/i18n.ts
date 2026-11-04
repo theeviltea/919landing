@@ -6,6 +6,9 @@ export const STORE = {
   ios: 'https://apps.apple.com/app/id1533779693',
   android: 'https://play.google.com/store/apps/details?id=net.app919',
 };
+// The 919 web app. The landing and the web app are going to share one domain; update when they are merged.
+export const WEB_URL = 'https://919.ae/';
+
 export const SOCIAL = {
   instagram: 'https://www.instagram.com/919_app/',
   facebook: 'https://www.facebook.com/919app/',
@@ -21,7 +24,7 @@ const en = {
     description:
       '919 is the hiring app for hospitality, events, modeling, music and beauty in the UAE. Talent shows who they are with photos and a video. Employers post a vacancy and hire within a day.',
   },
-  nav: { talent: 'For talent', employers: 'For employers', features: 'Features', pricing: 'Pricing', faq: 'FAQ', download: 'Get the app', lang: 'RU', langHref: '/ru/' },
+  nav: { talent: 'For talent', employers: 'For employers', features: 'Features', pricing: 'Pricing', faq: 'FAQ', web: '919 Web', download: 'Get the app', lang: 'RU', langHref: '/ru/' },
   hero: {
     title: ['Find work.', 'Find people.'],
     lead: 'The hiring app for hospitality, events, modeling and music in the UAE. Talent shows who they are with photos and a video. Verified employers post a vacancy and hire within a day.',
@@ -110,6 +113,14 @@ const en = {
     ] as [string, string][],
   },
   cta: { title: 'Your next job is already posted', text: 'Download 919 and see it today.' },
+  web: {
+    tag: '919 Web',
+    title: 'No app? No problem.',
+    text: 'Vacancies, talent and messages right in the browser — on a laptop at work or a phone without space for one more app.',
+    cta: 'Open 919 Web',
+    url: '919.ae',
+    ticker: ['Find work', 'Find people', 'No download', 'Any browser', 'Dubai', 'Abu Dhabi'],
+  },
   footer: { rights: '© 919 App, 2026', contact: 'Write to us', top: 'Back to top' },
 };
 
@@ -119,7 +130,7 @@ const ru: typeof en = {
     description:
       '919 — приложение для найма в hospitality, ивентах, модельном бизнесе, музыке и бьюти в ОАЭ. Соискатели показывают себя на фото и видео. Работодатели публикуют вакансию и нанимают за день.',
   },
-  nav: { talent: 'Соискателям', employers: 'Работодателям', features: 'Возможности', pricing: 'Цены', faq: 'Вопросы', download: 'Скачать', lang: 'EN', langHref: '/' },
+  nav: { talent: 'Соискателям', employers: 'Работодателям', features: 'Возможности', pricing: 'Цены', faq: 'Вопросы', web: '919 Web', download: 'Скачать', lang: 'EN', langHref: '/' },
   hero: {
     title: ['Найди работу.', 'Найди людей.'],
     lead: 'Приложение для найма в hospitality, ивентах, модельном бизнесе и музыке в ОАЭ. Соискатели показывают себя на фото и видео. Проверенные работодатели публикуют вакансию и нанимают за день.',
@@ -208,6 +219,14 @@ const ru: typeof en = {
     ],
   },
   cta: { title: 'Твоя следующая работа уже опубликована', text: 'Скачай 919 и посмотри сегодня.' },
+  web: {
+    tag: '919 Web',
+    title: 'Без приложения? Без проблем.',
+    text: 'Вакансии, таланты и сообщения прямо в браузере — на ноутбуке на работе или на телефоне, где нет места ещё для одного приложения.',
+    cta: 'Открыть 919 Web',
+    url: '919.ae',
+    ticker: ['Найди работу', 'Найди людей', 'Без скачивания', 'Любой браузер', 'Дубай', 'Абу-Даби'],
+  },
   footer: { rights: '© 919 App, 2026', contact: 'Написать нам', top: 'Наверх' },
 };
 
