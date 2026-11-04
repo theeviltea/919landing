@@ -389,6 +389,7 @@ const flight = Array.from({ length: 27 }, (_, i) => shapeNames[(i * 4) % shapeNa
       <!-- Back to the web app -->
       <section class="webx" aria-labelledby="web-title">
         <a class="webx__card" href={WEB_URL} target="_blank" rel="noopener">
+          <span class="wrap webx__in">
           <span class="webx__art" aria-hidden="true">
             <img class="webx__shape s1" src="/img/shapes/star8.webp" alt="" />
             <img class="webx__shape s2" src="/img/shapes/ring.webp" alt="" />
@@ -403,6 +404,7 @@ const flight = Array.from({ length: 27 }, (_, i) => shapeNames[(i * 4) % shapeNa
             <p>{t.web.text}</p>
           </span>
           <span class="webx__cta">{t.web.cta}<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </span>
         </a>
       </section>
     </main>
